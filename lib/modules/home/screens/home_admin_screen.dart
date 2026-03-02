@@ -27,7 +27,7 @@ class HomeAdminScreen extends StatelessWidget {
           DgCard(
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text('Olá, ${me.userName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+              title: Text('Olá, ${me.displayName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
               subtitle: Text('Operador #${me.operadorId}'),
             ),
           ),
@@ -56,3 +56,4 @@ class HomeAdminScreen extends StatelessWidget {
     );
   }
 }
+

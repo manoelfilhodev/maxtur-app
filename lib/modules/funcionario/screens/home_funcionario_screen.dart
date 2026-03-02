@@ -3,6 +3,7 @@ import 'package:systex_frotas/core/widgets/dg_card.dart';
 import 'package:systex_frotas/core/widgets/dg_scaffold.dart';
 import 'package:systex_frotas/core/widgets/dg_toast.dart';
 import 'package:systex_frotas/modules/auth/models/me_dto.dart';
+import 'package:systex_frotas/modules/funcionario/screens/funcionario_feedback_screen.dart';
 import 'package:systex_frotas/modules/funcionario/screens/funcionario_rastreamento_screen.dart';
 import 'package:systex_frotas/modules/home/screens/home_screen.dart';
 
@@ -15,7 +16,7 @@ class HomeFuncionarioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DgScaffold(
       appBar: AppBar(
-        title: const Text('Funcionário'),
+        title: const Text('Funcionario'),
         actions: [
           IconButton(
             onPressed: () => HomeScreen.performLogout(context),
@@ -28,7 +29,7 @@ class HomeFuncionarioScreen extends StatelessWidget {
           DgCard(
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text('Olá, ${me.userName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+              title: Text('Ola, ${me.displayName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
               subtitle: const Text('Acompanhe sua rota de fretado em tempo real.'),
             ),
           ),
@@ -55,11 +56,23 @@ class HomeFuncionarioScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           DgCard(
-            onTap: () => DgToast.show(context, 'Meus Horários (em breve).'),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const FuncionarioFeedbackScreen()),
+            ),
+            child: const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.feedback_rounded, color: Colors.white),
+              title: Text('Sugestoes e Criticas', style: TextStyle(color: Colors.white)),
+              trailing: Icon(Icons.chevron_right, color: Colors.white70),
+            ),
+          ),
+          const SizedBox(height: 10),
+          DgCard(
+            onTap: () => DgToast.show(context, 'Meus Horarios (em breve).'),
             child: const ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(Icons.schedule_rounded, color: Colors.white),
-              title: Text('Meus Horários', style: TextStyle(color: Colors.white)),
+              title: Text('Meus Horarios', style: TextStyle(color: Colors.white)),
             ),
           ),
         ],

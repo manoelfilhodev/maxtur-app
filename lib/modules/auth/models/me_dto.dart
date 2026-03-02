@@ -14,6 +14,14 @@ class MeDto {
   final String role;
   final int operadorId;
   final int? clienteId;
+  String get displayName {
+    final full = userName.trim();
+    if (full.isEmpty) return 'Usuário';
+    final parts = full.split(RegExp(r'\s+')).where((p) => p.isNotEmpty).toList();
+    if (parts.isEmpty) return 'Usuário';
+    if (parts.length == 1) return parts.first;
+    return '${parts.first} ${parts.last}';
+  }
 
   RoleType get roleType => RoleParser.parse(role);
 
@@ -21,7 +29,7 @@ class MeDto {
     final user = json['user'] is Map<String, dynamic> ? json['user'] as Map<String, dynamic> : <String, dynamic>{};
     return MeDto(
       userId: _toInt(user['id']),
-      userName: (user['name'] ?? '').toString(),
+      userName: (user['name'] ?? user['nome'] ?? json['name'] ?? json['nome'] ?? '').toString(),
       role: (json['role'] ?? user['role'] ?? '').toString(),
       operadorId: _toInt(json['operador_id']),
       clienteId: _toNullableInt(json['cliente_id']),

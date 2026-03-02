@@ -29,7 +29,7 @@ class HomeMotoristaScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Olá, ${me.userName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                Text('Olá, ${me.displayName}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 6),
                 const Text('Checklist diário do veículo do operador.'),
               ],
@@ -58,3 +58,4 @@ class HomeMotoristaScreen extends StatelessWidget {
     );
   }
 }
+

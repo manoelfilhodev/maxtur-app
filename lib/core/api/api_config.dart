@@ -20,6 +20,7 @@ class ApiConfig {
 
   // Funcionario
   static const String funcionarioTripActivePath = '/api/app/funcionario/trip/active';
+  static const String funcionarioFeedbackPath = '/api/app/funcionario/feedback';
 
   // Admin / notificacoes
   static const String notificationsPath = '/api/notifications';
