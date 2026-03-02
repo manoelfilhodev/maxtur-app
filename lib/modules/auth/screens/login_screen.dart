@@ -6,7 +6,7 @@ import 'package:systex_frotas/core/widgets/dg_card.dart';
 import 'package:systex_frotas/core/widgets/dg_input.dart';
 import 'package:systex_frotas/core/widgets/dg_scaffold.dart';
 import 'package:systex_frotas/core/widgets/dg_toast.dart';
-import 'package:systex_frotas/modules/auth/auth_navigation.dart';
+import 'package:systex_frotas/modules/auth/services/auth_route_guard.dart';
 import 'package:systex_frotas/modules/auth/services/auth_service.dart';
 import 'package:systex_frotas/modules/auth/services/auth_storage.dart';
 
@@ -48,10 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await _service.login(email: email, password: _passwordController.text);
       final me = await _service.me();
       if (!mounted) return;
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => buildHomeForRole(me)),
-        (route) => false,
-      );
+      await AuthRouteGuard.goPostAuth(context, me, clearStack: true);
     } catch (e) {
       if (!mounted) return;
       DgToast.show(context, e.toString().replaceFirst('Exception: ', ''), isError: true);

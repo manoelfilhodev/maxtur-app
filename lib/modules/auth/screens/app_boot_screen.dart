@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:systex_frotas/modules/auth/auth_navigation.dart';
 import 'package:systex_frotas/modules/auth/screens/login_screen.dart';
+import 'package:systex_frotas/modules/auth/services/auth_route_guard.dart';
 import 'package:systex_frotas/modules/auth/services/auth_service.dart';
 import 'package:systex_frotas/modules/auth/services/auth_storage.dart';
 
@@ -32,7 +32,7 @@ class _AppBootScreenState extends State<AppBootScreen> {
 
       final me = await _service.me();
       if (!mounted) return;
-      _goTo(buildHomeForRole(me));
+      await AuthRouteGuard.goPostAuth(context, me, clearStack: true);
     } catch (_) {
       await AuthStorage.clearSession(clearProfile: false);
       if (!mounted) return;

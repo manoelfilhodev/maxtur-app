@@ -1,3 +1,5 @@
+import 'package:systex_frotas/modules/auth/models/role_type.dart';
+
 class MeDto {
   MeDto({
     required this.userId,
@@ -13,18 +15,14 @@ class MeDto {
   final int operadorId;
   final int? clienteId;
 
-  String get roleKey => role.toLowerCase().trim().replaceAll(RegExp(r'[^a-z0-9]'), '');
-
-  bool get isMotorista => const <String>{'motorista', 'driver'}.contains(roleKey);
-  bool get isCliente => const <String>{'cliente', 'client', 'clientefinal'}.contains(roleKey);
-  bool get isAdmin => const <String>{'admin', 'administrador', 'operador'}.contains(roleKey);
+  RoleType get roleType => RoleParser.parse(role);
 
   factory MeDto.fromJson(Map<String, dynamic> json) {
     final user = json['user'] is Map<String, dynamic> ? json['user'] as Map<String, dynamic> : <String, dynamic>{};
     return MeDto(
       userId: _toInt(user['id']),
       userName: (user['name'] ?? '').toString(),
-      role: (user['role'] ?? '').toString(),
+      role: (json['role'] ?? user['role'] ?? '').toString(),
       operadorId: _toInt(json['operador_id']),
       clienteId: _toNullableInt(json['cliente_id']),
     );
