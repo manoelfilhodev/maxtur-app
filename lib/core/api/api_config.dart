@@ -18,6 +18,9 @@ class ApiConfig {
   // Cliente solicitacoes
   static const String clienteSolicitacoesPath = '/api/cliente/solicitacoes';
 
+  // Funcionario
+  static const String funcionarioTripActivePath = '/api/app/funcionario/trip/active';
+
   // Admin / notificacoes
   static const String notificationsPath = '/api/notifications';
   static String notificationReadPath(int id) => '/api/notifications/$id/read';
